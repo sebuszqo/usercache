@@ -2,7 +2,8 @@ package test
 
 import (
 	"fmt"
-	cachebucket "github.com/sebuszqo/usercache/cache_bucket"
+	"github.com/redis/go-redis/v9"
+	cacheredis "github.com/sebuszqo/usercache/cache_redis"
 	"github.com/sebuszqo/usercache/database"
 	"strconv"
 	"sync"
@@ -21,12 +22,12 @@ func TestUserCache_GetUser(t *testing.T) {
 
 	//uc := cachemap.NewUserCache()
 
-	uc := cachebucket.NewUserCache(50)
+	//uc := cachebucket.NewUserCache(50)
 
-	//redisClient := redis.NewClusterClient(&redis.ClusterOptions{
-	//	Addrs: []string{"127.0.0.1:7000", "127.0.0.1:7001", "127.0.0.1:7002"},
-	//})
-	//uc := cacheredis.NewUserCache(redisClient)
+	redisClient := redis.NewClusterClient(&redis.ClusterOptions{
+		Addrs: []string{"127.0.0.1:7000", "127.0.0.1:7001", "127.0.0.1:7002"},
+	})
+	uc := cacheredis.NewUserCache(redisClient)
 
 	var wg sync.WaitGroup
 
