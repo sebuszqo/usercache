@@ -63,7 +63,7 @@ func GetUserByID(userID uint) (*User, error) {
 		log.Printf("Error retrieving user with ID %d: %v", userID, result.Error)
 		return nil, result.Error
 	}
-	log.Printf("User with ID %d retrieved from the database", userID)
+	log.Printf("User with ID %d retrieved from the database %v", userID, result.Error)
 	return &user, nil
 
 }
